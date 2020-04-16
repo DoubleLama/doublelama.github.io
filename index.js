@@ -1,8 +1,7 @@
 const start = () => {
   const selector = document.getElementById("movies");
   const movieSelect = document.getElementById("movieSelect").value;
-  const URL = `http://www.omdbapi.com/?apikey=b064d5d9&s=${movieSelect}`;
-
+  const URL = `https://www.omdbapi.com/?apikey=b064d5d9&s=${movieSelect}`;
   fetch(URL)
     .then((response) => response.json())
     .then((response) => {
@@ -12,7 +11,7 @@ const start = () => {
       let movie = response.Search;
       selector.innerHTML = "";
       for (let i = 0; i < 6; i++) {
-      const infoURL = `http://www.omdbapi.com/?apikey=b064d5d9&i=${movie[i].imdbID}`;
+      const infoURL = `https://www.omdbapi.com/?apikey=b064d5d9&i=${movie[i].imdbID}`;
         fetch(infoURL)
         .then((response1) => response1.json())
         .then((response1) => {
@@ -33,7 +32,6 @@ const start = () => {
           })
     .catch((error) => console.error(error));
 };
-
 const showMovies = (selector, poster, name, date, id, resume) => {
   selector.innerHTML += `
       <div class="card m-5 col-md-7 mx-auto obs">
@@ -73,8 +71,6 @@ const showMovies = (selector, poster, name, date, id, resume) => {
       </div>
   `;
 };
-
-
 const observerAnimation = () =>{
 let observer = new IntersectionObserver(
   function (observables) {
@@ -89,12 +85,10 @@ let observer = new IntersectionObserver(
     threshold: [0.5],
   }
   );
-  
   let items = document.querySelectorAll(".obs");
   items.forEach(function (item) {
     item.classList.add("invisible");
     observer.observe(item);
   });
 }
-
 document.getElementById("valid").addEventListener("click", start);
